@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
-public class Sudoku {
+public class SudokuGenerator {
 
 	/**
 	 * Check if the given number can be placed in cell at (x,y)
@@ -66,13 +66,20 @@ public class Sudoku {
 	 */
 	public static int[][] generate() {
 		int[][] result = new int[9][9];
+
+		// board must be filled at random
+		ArrayList<Integer> rowOrder = new ArrayList<Integer>(9);
+		ArrayList<Integer> colOrder = new ArrayList<Integer>(9);
+		Collections.shuffle(rowOrder);
+		Collections.shuffle(colOrder);
+
 		ArrayList<Integer> numList = new ArrayList<Integer>(9);
-		Random r = new Random();
 
 		// initially fill number list
 		for (int j = 0; j < 9; j++) {
 			numList.add(j + 1);
 		}
+
 
 		// fill result grid
 		for (int i = 0; i < 9; i++) { // row
@@ -100,6 +107,10 @@ public class Sudoku {
 		return result;
 	}
 
+	/**
+	 * Print a Sudoku grid.
+	 * @param grid the grid to print
+	 */
 	public static void printGrid(int[][] grid) {
 		System.out.printf("%n");
 		System.out.printf("%n");
@@ -112,6 +123,10 @@ public class Sudoku {
 		}
 	}
 
+	/**
+	 * main
+	 * @param args yes
+	 */
 	public static void main(String[] args) {
 		int[][] result = generate();
 		if (result == null) {
